@@ -96,6 +96,11 @@ const ProjectChart = createReactClass({
       if (data && data[0]) {
         this.issueId = data[0].id;
         this.fetchPerfData();
+      } else {
+        this.setState({
+          error: true,
+          loading: false,
+        });
       }
     }).catch(() => {
       this.setState({
@@ -364,7 +369,6 @@ const ProjectChart = createReactClass({
     } else if (point.context[metricType] < niceMetric) {
       name = '好';
     }
-    debugger;
     if (!this.pieDataTool[metricType][name]) {
       this.pieDataTool[metricType][name] = 1;
     } else {
