@@ -98,7 +98,7 @@ const ProjectChart = createReactClass({
         this.fetchPerfData();
       } else {
         this.setState({
-          error: true,
+          error: false,
           loading: false,
         });
       }
