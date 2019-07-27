@@ -95,8 +95,6 @@ const ProjectChart = createReactClass({
             this.fetchPerfData();
             return;
         }
-        this.fetchPerfData();
-        return;
         this.request(this.getStatsEndpoint()).then(data => {
             if (data && data[0]) {
                 this.issueId = data[0].id;
