@@ -10,7 +10,6 @@ import PageHeading from 'app/components/pageHeading';
 import {t} from 'app/locale';
 import withEnvironmentInQueryString from 'app/utils/withEnvironmentInQueryString';
 
-import EventList from './eventList';
 import ProjectChart from './chart';
 
 const PERIOD_HOUR = '1h';
