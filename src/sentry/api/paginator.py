@@ -20,8 +20,8 @@ from sentry.utils.cursors import build_cursor, Cursor, CursorResult
 
 quote_name = connections['default'].ops.quote_name
 
-
-MAX_LIMIT = 100
+# todo: yhh
+MAX_LIMIT = 5000000
 MAX_HITS_LIMIT = 1000
 
 
@@ -106,7 +106,7 @@ class BasePaginator(object):
     def value_from_cursor(self, cursor):
         raise NotImplementedError
 
-    def get_result(self, limit=100, cursor=None, count_hits=False, known_hits=None):
+    def get_result(self, limit=5000000, cursor=None, count_hits=False, known_hits=None):
         # cursors are:
         #   (identifier(integer), row offset, is_prev)
         if cursor is None:
