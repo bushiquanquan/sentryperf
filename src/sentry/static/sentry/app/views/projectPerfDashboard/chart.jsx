@@ -419,7 +419,7 @@ const ProjectChart = createReactClass({
                 trigger: 'axis'
             },
             legend: {
-                data: ['首字节', '可交互', '完全加载']
+                data: ['首字节', '首字节达标线', '可交互', '可交互达标线', '完全加载', '完全加载达标线']
             },
             grid: {
                 left: '3%',
@@ -442,7 +442,10 @@ const ProjectChart = createReactClass({
             },
             color: [
                 '#7c6a8e',
+                '#7c6a8e',
                 '#37a6fb',
+                '#37a6fb',
+                '#ff485a',
                 '#ff485a'
             ],
             series: [
@@ -453,24 +456,58 @@ const ProjectChart = createReactClass({
                     data: []
                 },
                 {
+                    name: '首字节达标线',
+                    type: 'line',
+                    standard: 500,
+                    stack: '',
+                    data: []
+                },
+                {
                     name: '可交互',
                     type: 'line',
                     stack: '',
                     data: []
                 },
                 {
+                    name: '可交互达标线',
+                    type: 'line',
+                    standard: 1500,
+                    stack: '',
+                    data: []
+                },
+                {
                     name: '完全加载',
+                    type: 'line',
+                    standard: 3000,
+                    stack: '',
+                    data: []
+                },
+                {
+                    name: '完全加载达标线1',
                     type: 'line',
                     stack: '',
                     data: []
                 }
             ]
         };
+        console.log('666666');
         option.xAxis.data = xAxis;
         option.series.forEach((i, index) => {
-            i.data = data[index];
+            // 排在偶数为数据线，其余为达标线
+            if (!(index % 2)) {
+                i.data = data[index / 2];
+            } else {
+                i.data = xAxis.map(() => {
+                   return i.standard;
+                });
+            }
+
         });
         return option;
+    },
+    // 添加标准值
+    addStandard() {
+
     },
     // get
     renderChart() {
