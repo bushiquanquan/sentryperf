@@ -187,7 +187,7 @@ const ProjectChart = createReactClass({
                         browserTool[release.contexts.browser.name]++;
                     }
                     // 性能分级
-                    // 首字节：<50:好;50-100:正常；>100:差
+                    // 首字节：<50:好;50-500:正常；>500:差
                     // 可交互：<1500:好;1500-2000:正常；>2000:差
                     // 完全加载：<1500:好;1500-3000:正常；>3000:差
                     this.getPieData('ttfb', release)
@@ -260,7 +260,7 @@ const ProjectChart = createReactClass({
         let option = {
             title: {
                 text: '性能优劣占比',
-                subtext: '首字节：<50:好;50-100:正常；>100:差。可交互：<1500:好;1500-2000:正常；>2000:差。完全加载：<1500:好;1500-3000:正常；>3000:',
+                subtext: '首字节：<50:好;50-500:正常；>500:差。可交互：<1500:好;1500-2000:正常；>2000:差。完全加载：<1500:好;1500-3000:正常；>3000:',
                 x: 'center'
             },
             tooltip: {
@@ -442,11 +442,11 @@ const ProjectChart = createReactClass({
             },
             color: [
                 '#7c6a8e',
-                '#7c6a8e',
+                '#FDB28E',
                 '#37a6fb',
-                '#37a6fb',
+                '#FFEC82',
                 '#ff485a',
-                '#ff485a'
+                '#DBD4B0'
             ],
             series: [
                 {
@@ -478,13 +478,13 @@ const ProjectChart = createReactClass({
                 {
                     name: '完全加载',
                     type: 'line',
-                    standard: 3000,
                     stack: '',
                     data: []
                 },
                 {
-                    name: '完全加载达标线1',
+                    name: '完全加载达标线',
                     type: 'line',
+                    standard: 3000,
                     stack: '',
                     data: []
                 }
@@ -501,13 +501,8 @@ const ProjectChart = createReactClass({
                    return i.standard;
                 });
             }
-
         });
         return option;
-    },
-    // 添加标准值
-    addStandard() {
-
     },
     // get
     renderChart() {
@@ -671,7 +666,7 @@ const ProjectChart = createReactClass({
             // 可交互：<1500:好;1500-2000:正常；>2000:差
             // 完全加载：<1500:好;1500-3000:正常；>3000:差
             niceMetric = 50;
-            badMetric = 100;
+            badMetric = 500;
         } else if (metricType === 'domInteractive') {
             niceMetric = 1500;
             badMetric = 2000;
