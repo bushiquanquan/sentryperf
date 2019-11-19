@@ -355,11 +355,11 @@
     <table style="margin-bottom: 10px">
       <tr>
         <td>
-            <h4>Events Seen {{ duration.noun|title }}</h4>
+            <h4>本周的错误 {{ duration.noun|title }}</h4>
         </td>
         <td class="legend">
-            <span class="swatch all"></span> All: {{ report.series.all|small_count }}
-            <span class="swatch resolved"></span> Resolved: {{ report.series.resolved|small_count }}
+            <span class="swatch all"></span> 全部: {{ report.series.all|small_count }}
+            <span class="swatch resolved"></span> 已解决: {{ report.series.resolved|small_count }}
         </td>
       </tr>
     </table>
@@ -412,9 +412,9 @@
                         {% if percentage >= 1000 %}{{ percentage|floatformat:"0" }}{% else %}{{ percentage|floatformat:"-1" }}{% endif %}%
                     {% endwith %}
                     </div>
-                    <small>{% if change >= 0 %}more{% else %}fewer{% endif %} than {{ label }}</small>
+                    <small>{% if change >= 0 %}多于{% else %}少于{% endif %} {{ label }}</small>
                   {% else %}
-                    <small class="empty">There is not enough data to compare to {{ label }}.</small>
+                    <small class="empty">没有足够数据进行对比 {{ label }}.</small>
                   {% endif %}
                 </td>
               {% endfor %}
@@ -432,11 +432,11 @@
     <table class="issue-breakdown">
       <tr class="mobile-full-width">
         <td>
-          <h4>Events by Issue Type</h4>
+          <h4>按状态查看错误</h4>
         </td>
         <td class="legend">
           {% for type, count in report.distribution.types %}
-            <span class="swatch" style="background-color: {{ type.color }};"></span>{{ type.label }}<span class="quantity">: {% percent count total "0.1f" %}%</span>
+            <span class="swatch" style="background-color: {{ type.color }};"></span>{{ type.txt }}<span class="quantity">: {% percent count total "0.1f" %}%</span>
           {% endfor %}
         </td>
       </tr>
@@ -462,7 +462,7 @@
 
     {% with series=report.projects.series height=110 %}
 
-    <h4>Events by Project</h4>
+    <h4>按照项目查看事件</h4>
 
     <table class="graph">
       <tr>
@@ -495,10 +495,10 @@
       <thead>
         <tr>
           <th style="width: 1em;"></th>
-          <th style="width: 7em;" class="numeric">Events</th>
-          <th>Project</th>
-          <th style="width: 7em;" class="numeric col-filtered">Filtered</th>
-          <th style="width: 7em;" class="numeric col-rate-limited">Rate Limited</th>
+          <th style="width: 7em;" class="numeric">错误事件</th>
+          <th>项目</th>
+          <th style="width: 7em;" class="numeric col-filtered">过滤后</th>
+          <th style="width: 7em;" class="numeric col-rate-limited">速率限制</th>
         </tr>
       </thead>
       <tbody>
@@ -509,7 +509,7 @@
           </td>
           <td class="numeric">{{ key.data.events|small_count:1 }}</td>
           <td>
-              {% if key.url %}<a href="{{ key.url }}">{% endif %}{{ key.label }}{% if key.url %}</a>{% endif %}
+              {% if key.url %}<a href="https://ivs-turbo.cn/{{ key.url }}">{% endif %}{{ key.label }}{% if key.url %}</a>{% endif %}
           </td>
           <td class="numeric col-filtered">{{ key.data.filtered|small_count:1 }}</td>
           <td class="numeric col-rate-limited">{{ key.data.rate_limited|small_count:1 }}</td>
@@ -525,7 +525,7 @@
               </td>
               <td class="numeric">{{ key.data.events|small_count:1 }}</td>
               <td>
-                  {% if key.url %}<a href="{{ key.url }}">{% endif %}{{ key.label }}{% if key.url %}</a>{% endif %}
+                  {% if key.url %}<a href="https://ivs-turbo.cn/{{ key.url }}">{% endif %}{{ key.label }}{% if key.url %}</a>{% endif %}
               </td>
               <td class="numeric col-filtered">{{ key.data.filtered|small_count:1 }}</td>
               <td class="numeric col-rate-limited">{{ key.data.rate_limited|small_count:1 }}</td>
@@ -545,12 +545,12 @@
     <table style="margin-bottom: 25px;">
       <tr class="mobile-full-width">
         <th style="width: 300px;">
-          <h4>3 Month History</h4>
+          <h4>近三月历史数据</h4>
         </th>
         <td class="spectrum" style="vertical-align: bottom;">
-          Fewer Events
+          报错更少
           <div class="range">{% for color in report.calendar.legend %}<span style="background-color: {{ color }}">&nbsp;</span>{% endfor %}</div>
-          More Events
+          报错更多
         </td>
       </tr>
     </table>
@@ -563,13 +563,13 @@
               <h5>{{ first_date|date:"F Y" }}</h5>
               <table>
                 <tr>
-                  <th>S</th>
-                  <th>M</th>
-                  <th>T</th>
-                  <th>W</th>
-                  <th>T</th>
-                  <th>F</th>
-                  <th>S</th>
+                  <th>日</th>
+                  <th>一</th>
+                  <th>二</th>
+                  <th>三</th>
+                  <th>四</th>
+                  <th>五</th>
+                  <th>六</th>
                 </tr>
                 {% for week in weeks %}
                   <tr>

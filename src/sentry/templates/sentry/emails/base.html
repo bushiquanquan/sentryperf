@@ -41,11 +41,11 @@
       <div class="container">
         <div class="footer">
           {% block footer %}
-          <a href="{% absolute_uri %}" style="float:right">Home</a>
-          {% url 'sentry-account-settings-notifications' as settings_link %}
-          <a href="{% absolute_uri settings_link %}">Notification Settings</a>
+          <a href="https://ivs-turbo.cn/sentry/" style="float:right">首页</a>
+          <!--{% url 'sentry-account-settings-notifications' as settings_link %}-->
+          <!--<a href="{% absolute_uri settings_link %}">通知设置</a>-->
           {% if unsubscribe_link %}
-            &middot; <a href="{{ unsubscribe_link }}">Unsubscribe</a>
+            &middot; <a href="{{ unsubscribe_link }}">取消订阅</a>
           {% endif %}
           {% endblock %}
         </div>

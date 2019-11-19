@@ -609,9 +609,9 @@ def build_message(timestamp, duration, organization, user, reports):
 
     duration_spec = durations[duration]
     message = MessageBuilder(
-        subject=u'{} Report for {}: {} - {}'.format(
-            duration_spec.adjective.title(),
-            organization.name,
+        subject=u'周报 : {} - {}'.format(
+            # duration_spec.adjective.title(),
+            # organization.name,
             date_format(start),
             date_format(stop),
         ),
@@ -745,7 +745,7 @@ def deliver_organization_user_report(timestamp, duration, organization_id, user_
 
 
 Point = namedtuple('Point', 'resolved unresolved')
-DistributionType = namedtuple('DistributionType', 'label color')
+DistributionType = namedtuple('DistributionType', 'label color txt')
 
 
 def series_map(function, series):
@@ -864,9 +864,9 @@ def to_context(organization, interval, reports):
                 zip(
                     (
                         DistributionType(
-                            'New', '#8477e0'), DistributionType(
-                            'Reopened', '#6C5FC7'),
-                        DistributionType('Existing', '#534a92'),
+                            'New', '#8477e0', '新增'), DistributionType(
+                            'Reopened', '#6C5FC7', '再次出现'),
+                        DistributionType('Existing', '#534a92', '已存在'),
                     ),
                     report.issue_summaries,
                 ),
@@ -875,9 +875,9 @@ def to_context(organization, interval, reports):
             sum(report.issue_summaries),
         },
         'comparisons': [
-            ('last week', change(report.aggregates[-1], report.aggregates[-2])),
+            ('上周', change(report.aggregates[-1], report.aggregates[-2])),
             (
-                'four week average', change(
+                '四周平均值', change(
                     report.aggregates[-1],
                     mean(report.aggregates) if all(v is not None
                                                    for v in report.aggregates) else None,

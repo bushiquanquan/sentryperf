@@ -123,7 +123,7 @@ def add_unsubscribe_link(context):
                 ] = 'javascript:alert("This is a preview page, what did you expect to happen?");'
 
 
-# TODO(dcramer): use https://github.com/disqus/django-mailviews
+# TODO(dcramer): use https://github.com/disqus/django-mailviews,
 class MailPreview(object):
     def __init__(self, html_template, text_template, context=None, subject=None):
         self.html_template = html_template
