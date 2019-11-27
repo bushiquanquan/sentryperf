@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from __future__ import absolute_import
 
 import bisect
@@ -606,15 +607,13 @@ durations = {
 
 def build_message(timestamp, duration, organization, user, reports):
     start, stop = interval = _to_interval(timestamp, duration)
-
-    duration_spec = durations[duration]
+     # duration_spec = durations[duration],
      # duration_spec.adjective.title(),
      # organization.name,
     message = MessageBuilder(
-        subject=u'{} : {} - {}'.format(
-            '周报',
+        subject=u'Sentry 周报 : {} - {}'.format(
             date_format(start),
-            date_format(stop),
+            date_format(stop)
         ),
         template='sentry/emails/reports/body.txt',
         html_template='sentry/emails/reports/body.html',
