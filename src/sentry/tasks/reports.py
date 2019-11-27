@@ -611,7 +611,8 @@ def build_message(timestamp, duration, organization, user, reports):
      # duration_spec.adjective.title(),
      # organization.name,
     message = MessageBuilder(
-        subject=u'周报 : {} - {}'.format(
+        subject=u'{} : {} - {}'.format(
+            '周报',
             date_format(start),
             date_format(stop),
         ),
