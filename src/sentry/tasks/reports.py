@@ -608,10 +608,10 @@ def build_message(timestamp, duration, organization, user, reports):
     start, stop = interval = _to_interval(timestamp, duration)
 
     duration_spec = durations[duration]
+     # duration_spec.adjective.title(),
+     # organization.name,
     message = MessageBuilder(
         subject=u'周报 : {} - {}'.format(
-            # duration_spec.adjective.title(),
-            # organization.name,
             date_format(start),
             date_format(stop),
         ),
